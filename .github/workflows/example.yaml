@@ -34,4 +34,4 @@ jobs:
       - name: Get sha
         run: echo "SHA_ID=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
         id: get-sha
-      - run: echo ${{ steps.git-sha.outputs.SHA_ID }}
+      - run: echo "${{ steps.git-sha.outputs.SHA_ID }}"

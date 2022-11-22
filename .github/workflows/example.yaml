@@ -31,7 +31,12 @@ jobs:
         with:
           repository: ${{ fromJSON(steps.get-pr.outputs.result).head.repo.full_name }}
           ref: ${{ fromJSON(steps.get-pr.outputs.result).head.sha }} # or .head.ref for branch name
-      - name: Get sha
-        run: echo "SHA_ID=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
-        id: get-sha
-      - run: echo "${{ steps.git-sha.outputs.SHA_ID }}"
+      # - name: Get sha
+      #   id: get-sha
+      #   run: echo "SHA_ID=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
+      # - run: echo "${{ steps.git-sha.outputs.SHA_ID }}"
+      - name: Set outputs
+        id: vars
+        run: echo "sha_short=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
+      - name: Check outputs
+        run: echo ${{ steps.vars.outputs.sha_short }}
